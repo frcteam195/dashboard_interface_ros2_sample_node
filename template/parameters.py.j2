@@ -1,0 +1,30 @@
+#!/usr/bin/python3
+import rclpy
+import rclpy.node
+import rclpy.parameter
+from dataclasses import dataclass
+from typing import List
+
+@dataclass
+class parameters_t:
+    {% for param_name,type in lang_types.items() %}
+{{param_name}}: {{type}} = None
+    {% endfor %}
+
+
+def load_parameters(node : rclpy.node.Node, Parameters : parameters_t):
+    {% for param_name,ros_type in params.items() %}
+node.declare_parameter("{{param_name}}", {{ros_type}})
+    {% endfor %}
+
+    {% for param_name,type in value_types.items() %}
+Parameters.{{param_name}} = node.get_parameter("{{param_name}}").get_parameter_value().{{type}}
+    {% endfor %}
+
+class ParameterizedNode(rclpy.node.Node):
+    def __init__(self, node_name):
+        super().__init__(node_name)
+        self.Parameters = parameters_t()
+        load_parameters(self, self.Parameters)
+
+
