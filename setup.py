@@ -3,7 +3,7 @@ from template.render_jinja_py import render_jinja
 from pathlib import Path
 import os
 
-package_name = 'dashboard_interface_ros2_sample_node'
+package_name = 'dashboard_interface_ros2_node'
 
 base_path_str = str(Path(str(Path(__file__).resolve().parent) + '/'))
 template_path = Path(base_path_str + '/' + package_name + '/generated')
@@ -31,7 +31,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'dashboard_interface_ros2_sample_node = dashboard_interface_ros2_sample_node.dashboard_interface_ros2_sample_node:main',
+            'dashboard_interface_ros2_node = dashboard_interface_ros2_node.dashboard_interface_ros2_node:main',
         ],
     },
 )

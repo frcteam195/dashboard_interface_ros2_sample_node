@@ -3,7 +3,7 @@ import signal
 import sys
 
 import rclpy
-from dashboard_interface_ros2_sample_node.generated.parameters import ParameterizedNode
+from dashboard_interface_ros2_node.generated.parameters import ParameterizedNode
 
 from std_msgs.msg import String
 
@@ -20,7 +20,7 @@ BUFFER_SIZE = 1024
 
 class LocalNode(ParameterizedNode):
     def __init__(self):
-        super().__init__('dashboard_interface_ros2_sample_node')
+        super().__init__('dashboard_interface_ros2_node')
         register_for_robot_updates()
         self.autonomous_configuration_subscriber = BufferedROSMsgHandlerPy(AutonomousConfiguration)
         self.autonomous_configuration_subscriber.register_for_updates("AutonomousConfiguration")

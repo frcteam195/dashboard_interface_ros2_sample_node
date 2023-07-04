@@ -2,9 +2,11 @@ import jinja2
 import yaml
 import pathlib
 from typing import List
+import xml.etree.ElementTree as ET
 
 def render_jinja(arg_src_template, arg_src_file):
-    node_name = pathlib.Path(__file__).parent.parent.name
+    tree = ET.parse(str(pathlib.Path(__file__).resolve().parent.parent / "package.xml"))
+    node_name = tree.getroot().find('name').text
     robot_name = ""
 
     for item in pathlib.Path.cwd().parent.iterdir():
